@@ -69,6 +69,16 @@ int main(){
    sa_int.sa_flags = 0;
    sigaction(SIGINT, &sa_int, NULL);
 
+   // Install SIGQUIT handler
+   sa_quit.sa_handler = sigquit_handler;
+   // no additional signals will be blocked while the handler is running
+   sigemptyset(&sa_quit.sa_mask);
+  // the default behavior
+   sa_quit.sa_flags = 0;
+   // actually installs the handler
+   sigaction(SIGQUIT, &sa_quit, NULL);
+
+
    while(1){
       printf("Wait for another signal ...\n");
       pause();
