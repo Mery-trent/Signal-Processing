@@ -59,6 +59,15 @@ Returns: 0 on successful completion
 */
 int main(){
    // signal handlers will be installed here
+   struct sigaction sa_int;
+   struct sigaction sa_quit;
+   struct sigaction sa_usr1;
+
+   // Install SIGINT handler
+   sa_int.sa_handler = sigint_handler;
+   sigemtyset(&sa_int.sa_mask);
+   sa_int.sa_flags = 0;
+   sigaction(SIGINT, &sa_int, NULL);
 
    while(1){
       printf("Wait for another signal ...\n");
