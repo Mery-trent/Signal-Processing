@@ -74,7 +74,14 @@ void sigquit_handler(int sig){
 * Return: nothing
 
 */
-void sigusr1_handler(int sig){}
+void sigusr1_handler(int sig){
+
+   int status;
+   wait(&status);
+   printf("You pressed CTRL+C %d times", ctrl_c_count);
+   printf("Child sent a signal so I guess you are bored! ");
+   exit(0);
+}
 
 /*Function: main
    Installs signal handlers and waits indefinitely for signals using pause().
