@@ -78,6 +78,11 @@ int main(){
    // actually installs the handler
    sigaction(SIGQUIT, &sa_quit, NULL);
 
+   // Install SIGUSR1 handler
+   sa_usr1.sa_handler = sigusr1_handler;
+   sigemptyset(&sa_usr1.sa_mask);
+   sa_usr1.sa_flags = 0;
+   sigaction(SIGUSRR1, &sa_usr1, NULL);
 
    while(1){
       printf("Wait for another signal ...\n");
