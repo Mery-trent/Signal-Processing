@@ -33,12 +33,13 @@ pid_t parent_pid;
 // returns: nothing
 void sigint_handler(int sig)
 {
+   
 ctrl_c_count++;
 printf(" this is the %d time you pressed ctrl-c\n", ctrl_c_count);
 if (ctrl_c_count >= MAX)
 {
    printf("Maximum number of ctrl-c presses reached!\n");
-   printf("Next ctrl-c will terminate the program.\n");
+   printf("Press ctrl-c one more time to terminate the program.\n");
    // restore the default behaviour of SIGINT
    // stop calling my handler 
    //and go back to the standard ctrl+c behaviour
@@ -78,8 +79,9 @@ void sigusr1_handler(int sig){
 
    int status;
    wait(&status);
-   printf("You pressed CTRL+C %d times", ctrl_c_count);
-   printf("Child sent a signal so I guess you are bored! ");
+   printf("You pressed CTRL+C %d times\n", ctrl_c_count);
+   printf("Child sent a signal so I guess you are bored!\n ");
+   printf("Program terminating ...\n");
    exit(0);
 }
 
